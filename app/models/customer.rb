@@ -5,5 +5,5 @@ class Customer < ApplicationRecord
  has_many :deliveries
  has_many :orders
  
- end
+end
  
