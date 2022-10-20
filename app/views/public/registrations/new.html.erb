@@ -6,74 +6,74 @@
         <%= render "public/shared/error_messages", resource: resource %>
     <div class="row">
       <div class="col-3">
-        <div class="vh-20">名前</div>
-        <div class="vh-20">フリガナ</div>
-        <div>メールアドレス</div>
-        <div>郵便番号(ハイフンなし)</div>
-        <div>住所</div>
-        <div>電話番号(ハイフンなし)</div>
-        <div>パスワード(６文字以上)</div>
-        <div>パスワード(確認用)</div>
+        <div class="mt-4">名前</div>
+        <div class="mt-4">フリガナ</div>
+        <div class="mt-4">メールアドレス</div>
+        <div class="mt-4">郵便番号(ハイフンなし)</div>
+        <div class="mt-4">住所</div>
+        <div class="mt-4">電話番号(ハイフンなし)</div>
+        <div class="mt-4">パスワード(６文字以上)</div>
+        <div class="mt-4">パスワード(確認用)</div>
       </div>
 
+
+<!--labelだけで縦一行分の作る-->
       <div class="col-9">
               <div class="row">
                 <div class="col-4">
                   <div class="field row">
-                    <label class="col-3 vh-20"><%= f.label :"(姓)" %></label>
-                    <div class="col-9"><%= f.text_field :first_name %></div>
+                    <label class="mt-4 p-0"><%= f.label :"(姓)" %></label>
+                    <div class="mt-4"><%= f.text_field :first_name %></div>
                   </div>
                 </div>
                 <div class="col-4 ml-auto">
                   <div class="field row">
-                   <label class="col-3 vh-20"><%= f.label :"(名)" %></label>
-                   <div class="col-9"><%= f.text_field :last_name %></div>
+                   <label class="mt-4 p-0"><%= f.label :"(名)" %></label>
+                   <div class="mt-4"><%= f.text_field :last_name %></div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-4">
                   <div class="field row">
-                    <label class="col-3 vh-20"><%= f.label :"(セイ)" %></label>
-                    <div class="col-9"><%= f.text_field :first_name_kana %></div>
+                    <label class="vh-20 p-0"><%= f.label :"(セイ)" %></label>
+                    <div><%= f.text_field :first_name_kana %></div>
                   </div>
                 </div>
                 <div class="col-4 ml-auto">
                   <div class="field row">
-                    <label class="col-3 vh-20"><%= f.label :"(メイ)" %></label>
-                    <div class="col-9"><%= f.text_field :last_name_kana %></div>
+                    <label class="col-2 vh-20 p-0"><%= f.label :"(メイ)" %></label>
+                    <div class="col-10"><%= f.text_field :last_name_kana %></div>
                   </div>
                 </div>
               </div>
-
-                  <div class="field">
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-                  </div>
-                  <div class="field">
-                    <%= f.text_field :post_code %>
-                  </div>
-                  <div class="field">
-                    <%= f.text_field :post_code %>
-                  </div>
-                  <div class="field">
-                    <%= f.text_field :post_code %>
-                  </div>
-                  <div class="field">
-                    <%# if @minimum_password_length %>
-                    <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
-                    <%# end %>
-                    <%= f.password_field :password, autocomplete: "new-password" %>
-                  </div>
-                  <div class="field">
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-                  </div>
-                  <div class="actions">
-                      <%= f.submit "新規登録", class: "btn btn-success" %>
-                  </div>
-                <% end %>
+              <div class="offset-1">
+                <div class="field mt-4">
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
+                <div class="field mt-4">
+                  <%= f.text_field :post_code %>
+                </div>
+                <div class="field mt-4">
+                  <%= f.text_field :address %>
+                </div>
+                <div class="field mt-4">
+                  <%= f.text_field :phone_number %>
+                </div>
+                <div class="field mt-4">
+                  <%# if @minimum_password_length %>
+                  <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
+                  <%# end %>
+                  <%= f.password_field :password, autocomplete: "new-password" %>
+                </div>
+                <div class="field mt-4">
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div>
+                <div class="actions mt-4">
+                    <%= f.submit "新規登録", class: "btn btn-success" %>
+                </div>
+              <% end %>
         </div>
-
-
   </div>
   <h2>既に登録済みの方</h2>
   <p><%= render "public/shared/links" %>からログインしてください</p>
