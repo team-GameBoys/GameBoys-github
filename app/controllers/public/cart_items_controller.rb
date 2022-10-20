@@ -33,12 +33,12 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    cart_item=CartItem.find(params[:id]).destroy
+    @cart_item=CartItem.find(params[:id]).destroy
     redirect_to request.refere
   end
 
   def destroy_all
-    cart_items=CartItem.all
+    @cart_items=CartItem.all
     cart_items.destroy_all
     redirect_to request.refere
   end
