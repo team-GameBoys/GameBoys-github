@@ -1,35 +1,28 @@
 class Public::OrdersController < ApplicationController
   # 注文情報入力画面から作る郵便番号や宛名、住所を保存する
-  def new 
-    @orders = Order.new
+  # binding.pry
+
+  def confirm
+    @order = Order.new
+   if params[:order][:select_address] == "1"
+     @order.post_code = current_customer.post_code
+     @order.address = current_customer.address
+     @order.name = current_customer.first_name + current_customer.last_name
+   elsif params[:order][:select_address] == "2"
+     @deliveries = Deliveries.find(params[:order][:deliveries_id])
+     @order.post_code = @deliveries.post_code
+     @order.address = @deliveries.address
+     @order.name = @deliveries.name
+   elsif params[:order][:select_address] == "3"
+     @order.post_code = params([:order][:post_code]
+     @order.address = params([:order][:address])
+     @order.name = params([:order][:name])
+   end
   end
-  
-  # 購入確定
-  def create
-    
-    order.save
-    redirect_to 'orders/complete'
+
+  private
+
+  def order_params
+   params.require(:order).permit(:payment_method, :post_code, :address, :name)
   end
-  
-  def check
-    @order = Order.new(order_params)
-    if params[:order][:address_number] == 1
-       # view で定義している address_number が"1"のときこの処理を実行
-       # form_with で @order で送っているので、order に紐付いた address_number となる。以下同様
-       @order.name = currenr_customer.post_code # @order　の各カラムに必要なもののを入れます
-       @order.name = currenr_customer.address
-       @order.name = currenr_customer.name
-    elsif params[:order][:address_number] == "2"
-       # view で定義している address_number が"2"のときこの処理を実行
-    end
-  end
-  
-  def index
-    @orders = Order.all
-  end
-  
-  def show
-    @order = Order.find(params[:id])
-  end
-  
 end
