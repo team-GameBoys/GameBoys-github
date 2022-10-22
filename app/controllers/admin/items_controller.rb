@@ -4,6 +4,7 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @genre = Genre.find(params[:id])
     # @item = Item.new
   end
 
@@ -51,8 +52,6 @@ class Admin::ItemsController < ApplicationController
   private
     def item_params
       params.require(:item).permit(:genre_id,:name,:introduction,:image,:price,:is_active)
-      # スキーマにimageカラムを入れないといけないかも
-      # ジャンルの選択ができない
     end
 
 
