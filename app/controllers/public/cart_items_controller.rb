@@ -4,8 +4,8 @@ class Public::CartItemsController < ApplicationController
   def index
     @cart_items=CartItem.all
     @cart_items_customer=current_customer
-    # item=CartItem.find_by(item_id: params[:cart_item][:item_id])
-    # @total_price=@cart_items.item.add_tax_price
+    item=CartItem.find_by(item_id: params[:cart_item][:item_id])
+    @total_price=@cart_items.add_tax_price
   end
   # カート内商品を追加・保存
   def create
