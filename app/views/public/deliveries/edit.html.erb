@@ -1,19 +1,18 @@
-
 <div class="container">
     <div class="col-sm-6 ml-5 my-4">
-      <h5>配送先編集</h5>
+      <h2>配送先編集</h2>
     </div>
-        <%= form_with model: @delivery, url: deliveries_path, method: :post do |f| %>
+        <%= form_with model: @delivery, url: delivery_path(@delivery.id), method: :patch do |f| %>
         <div class="row">
           <div class="col-sm-3 py-1">
             郵便番号（ハイフンなし）
           </div>
-          
+
             <div class="col-sm-3 py-1">
               <%= f.text_field :post_code %>
             </div>
           </div>
-          
+
             <div class="row">
               <div class="col-sm-3 py-1">
                 住所
@@ -34,5 +33,5 @@
                 <% end %>
               </div>
             </div>
-  
+
 </div>

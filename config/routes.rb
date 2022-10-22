@@ -13,8 +13,14 @@ Rails.application.routes.draw do
    resources :items, only: [:index,:show]
    resources :cart_items, only: [:index,:update,:destroy_all,:destroy,:create]
    resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create]
-   resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
-   resources :customers, only: [:show,:edit,:update,:unsubscribe,:withdraw]
+   resources :deliveries, only: [:index,:edit,:create,:update,:destroy,]
+   get "customers/my_page" => "customers#show", as: "my_page"
+   get "customers/my_page/edit" => "customers#edit", as: "edit"
+   patch "customers/customers" => "customers#update", as: "update"
+   # 退会確認画面
+  get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
   end
 
   namespace :admin do
