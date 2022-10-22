@@ -6,7 +6,6 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :order_items,dependent: :destroy
   
-<<<<<<< HEAD
     # 消費税を加えた商品価格
   def add_tax_price
       (self.price * 1.1).round
@@ -21,11 +20,5 @@ class Item < ApplicationRecord
       image.variant(resize_to_limit: [width, height]).processed
   end
   
-=======
-      # 消費税を加えた商品価格
-    def add_tax_price
-        (self.price * 1.1).round
-    end
 
->>>>>>> origin/develop
 end
