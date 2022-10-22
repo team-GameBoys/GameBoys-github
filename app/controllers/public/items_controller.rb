@@ -9,6 +9,7 @@ class Public::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end
+<<<<<<< HEAD
 
   private
   def item_params
@@ -16,4 +17,7 @@ class Public::ItemsController < ApplicationController
     # スキーマにimageカラムを入れないといけないかもしれない
   end
 
+=======
+  
+>>>>>>> origin/develop
 end
