@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root to: 'homes#top'
+  get "/home/about" => "homes#about"
   devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -12,7 +13,12 @@ Rails.application.routes.draw do
   scope module: :public do
    resources :items, only: [:index,:show]
    resources :cart_items, only: [:index,:update,:destroy_all,:destroy,:create]
-   resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create]
+   resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create] do
+    collection do
+     get "comfirm"
+     get "complete"
+    end
+   end
    resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
   end
 
