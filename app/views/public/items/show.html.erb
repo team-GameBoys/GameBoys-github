@@ -13,6 +13,9 @@
       <h4>
         <%= simple_format(@item.introduction) %>
       </h4>
+      
+      
+      
 
       <% if @item.is_active == true %>
         <p class ="text-success">販売中</p>
@@ -21,7 +24,6 @@
         <!--@item.add_tax_price-->
         <!--.to_s(:delimited)は3桁ごとにカンマ区切りで表示してくれる便利なメソッドです-->
         <h3>¥ <%= @item.price() %> (税込)</h3>
-
         <p>
           <!--わからん-->
           <!--カートに入れると-->
