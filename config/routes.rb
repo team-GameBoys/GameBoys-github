@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
 
   scope module: :public do
    resources :items, only: [:index,:show]
+
    resources :cart_items, only: [:index,:update,:destroy_all,:destroy,:create]
    resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create] do
     collection do
@@ -19,7 +20,13 @@ Rails.application.routes.draw do
      get "complete"
     end
    end
+
+   resources :cart_items, only: [:index,:update,:destroy,:create]
+    delete '/cart_items' => 'cart_items#destroy_all', as: 'cart_items_destroy_all'
+   resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create]
+
    resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
+   resources :customers, only: [:show,:edit,:update,:unsubscribe,:withdraw]
   end
 
   namespace :admin do

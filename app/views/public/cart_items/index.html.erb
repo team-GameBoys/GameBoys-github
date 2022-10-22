@@ -1,41 +1,69 @@
 <%#= render %>
-<h2>ショッピングカート</h2>
-  <%= link_to cart_item_path(@cart_items), method: :delete, class: "btn btn-danger" do %>
-    <p>カートを空にする</p>
-  <% end %>
-      <table>
-        <th>
-          <td>商品名</td>
-          <td>単価（税込）</td>
-          <td>数量</td>
-          <td>小計</td>
-          <td></td>
-        </th>
-          <tr>
-            <td>（商品名）</td>
-            <td>（単価）</td>
-            <td>（数量）</td>
-            <td>（小計）</td>
-            <td>（『削除する』ボタン）</td>
-          </tr>
-      </table>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-5">
+      <h2>ショッピングカート</h2>
+    </div>
+    <div class="col-3 offset-4">
+        <%= link_to cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" do %>
+          <span>カートを空にする</span>
+        <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <table class="table table-bordered">
+          <thead style="background-color: #e5e5e5;">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td>（商品名）<%= cart_item.name %></td>
+                <td>（単価(税込)）<%= cart_item.add_tax_price.floor %></td>
 
-          <%= link_to items_path, class: "btn btn-primary" do  %>
-            <span>買い物を続ける</span>
-          <% end %>
+                <td>（数量）<!-- <%#= cart_item.quantity %>＋（セレクト機能）.to_i-->
+                <%= form_with model: @cart_item, url: cart_items, method: :post do %>
+                  <%= cart_item.number_field :quantity, min: 1, max:10 %>
+                  <%= cart_item.submit "変更" %>
+                <% end %>
 
-        <table>
+                 <!--小計を求めるメソッド＝＝subtotal-->
+                <td>（小計）<%= cart_item.subtotal %></td>
+                <% @total_price += cart_item.subtotal %>
+                <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-4">
+        <%= link_to items_path, class: "btn btn-primary" do  %>
+          <span>買い物を続ける</span>
+        <% end %>
+      </div>
+      <!--消費税を求めるメソッド＝＝add_tax_price-->
+      <div class="col-8 ">
+        <table class="table table-bordered" cellpadding="10">
           <tr>
-            <td>合計金額</td>
-            <td>(合計金額)</td>
+            <td style="background-color: #e5e5e5;"><strong>合計金額</strong></td>
+            <td>(合計金額)<%#= @total_price %></td>
           </tr>
         </table>
-
-        <%= link_to orders_path, method: :get, class: "btn btn-success" do %>
-          <p>情報入力画面に進む</p>
-        <% end %>
-
-
+      </div>
+    </div>
+    <div>
+      <%= link_to orders_path, method: :get, class: "btn btn-success" do %>
+        <span>情報入力画面に進む</span>
+      <% end %>
+    </div>
+</div>
 
 
 
