@@ -13,7 +13,6 @@ class Public::ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:genre_id,:name,:introduction,:image,:price)
-    # スキーマにimageカラムを入れないといけないかもしれない
   end
 
 end
