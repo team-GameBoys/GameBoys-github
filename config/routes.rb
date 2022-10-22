@@ -22,7 +22,7 @@ Rails.application.routes.draw do
    end
 
    resources :cart_items, only: [:index,:update,:destroy,:create]
-    delete '/cart_items' => 'cart_items#destroy_all'
+    delete '/cart_items' => 'cart_items#destroy_all', as: 'cart_items_destroy_all'
    resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create]
 
    resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
