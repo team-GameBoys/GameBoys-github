@@ -1,7 +1,22 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2>ジャンル編集</h2>
-    </div>
+<div class="container mt-4">
+  <div class="row mt-5">
+    <div class="col-9">
+      <div class="col-4">
+        <h2 class="ml-5">ジャンル編集</h2>
+      </div>
+          <div class="col">
+            <div class="row mt-5">
+              <div class="col-2 ">ジャンル名</div>
+              <div class="col-3 pl-0">
+                <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
+                <%= f.text_field :name, class: "mr-5", :size =>"30", placeholder: "ジャンル名" %>
+              </div>
+              <div class="col-3 ml-5">
+                <%= f.submit "変更を保存",  class: "ml-5 btn btn-success" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+     </div>
   </div>
 </div>
