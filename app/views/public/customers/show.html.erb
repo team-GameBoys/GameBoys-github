@@ -6,11 +6,11 @@
     <div class="col-md-2 mt-2">
       <h4><strong>登録情報</strong></h4>
     </div>
-    <div class="col-md-4 my-1 pl-0">
+    <div class="col-md-2 my-1 pl-0">
       <%= link_to "編集する",edit_path, class:"btn btn-success" %>
     </div>
     </div>
-      <table class="table table-bordered">
+      <table class="col-md-9 table table-bordered">
         <tbody>
           <tr>
             <td>氏名</td>
@@ -42,7 +42,7 @@
         <div class="col-sm-2 py-1 mt-2">
           <h5><strong>配送先</strong></h5>
         </div>
-          <div class="col-sm-4 py-1 px-0">
+          <div class="col-sm-2 py-1 px-0">
             <%= link_to "一覧を見る", deliveries_path, class: "btn btn-primary" %>
           </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="col-sm-2 py-1 mt-2">
               <h5><strong>注文履歴</strong></h5>
             </div>
-            <div class="col-sm-4 py-1 px-0">
+            <div class="col-sm-2 py-1 px-0">
               <%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>
             </div>
   </div>
