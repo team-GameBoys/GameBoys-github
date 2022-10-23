@@ -32,13 +32,14 @@
           <%= form_with model: @cart_item,url: cart_items_path, method: :post do |f| %>
             <%= f.hidden_field :item_id, :value=> @item.id  %>
             <!--選択できる数量は0以上にしたい-->
-            <%= f.number_field :quantity, placeholder:"個数選択" %>
+            
+            <%= f.number_field :quantity, placeholder:"個数選択",min:0 %>
             <%= f.submit "カートに入れる", class: "btn btn-success" %>
           <% end %>
         </p>
       <% else %>
         <h3 class="text-danger">
-        　SOLD OUT!!
+          SOLD OUT!!
         </h3>
       <% end %>
     </div>
