@@ -24,6 +24,14 @@ Rails.application.routes.draw do
    resources :cart_items, only: [:index,:update,:destroy,:create]
     delete '/cart_items' => 'cart_items#destroy_all', as: 'cart_items_destroy_all'
    resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create]
+   resources :deliveries, only: [:index,:edit,:create,:update,:destroy,]
+   get "customers/my_page" => "customers#show", as: "my_page"
+   get "customers/my_page/edit" => "customers#edit", as: "edit"
+   patch "customers/customers" => "customers#update", as: "update"
+   # 退会確認画面
+  get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
    resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
    resources :customers, only: [:show,:edit,:update,:unsubscribe,:withdraw]
