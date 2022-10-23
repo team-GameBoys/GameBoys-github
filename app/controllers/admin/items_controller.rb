@@ -4,14 +4,14 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @genre = Genre.find(params[:id])
+    @genre = @item.genre
     # @item = Item.new
   end
 
 
   def edit
     @item = Item.find(params[:id])
-
+    @genre_all = Genre.all
   end
 
   def index
