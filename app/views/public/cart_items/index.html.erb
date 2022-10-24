@@ -2,7 +2,9 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-5">
-      <h2>ショッピングカート</h2>
+      <div class="row">
+        <h2 class="px-3">ショッピングカート</h2>
+      </div>
     </div>
     <div class="col-3 offset-4">
         <%= link_to cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" do %>
@@ -21,22 +23,23 @@
             <th></th>
           </thead>
           <tbody>
-            <% @cart_items.each do |cart_item| %>
-              <tr>
-                <td>（商品名）<%= cart_item.name %></td>
-                <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
+            <% @total_price = 0 %>
+              <% @cart_items.each do |cart_item| %>
+                <tr>
+                  <td>（商品名）<%= cart_item.name %></td>
+                  <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
 
-                <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
-                <%= form_with model: @cart_item, url: cart_items, method: :post do %>
-                  <%= cart_item.number_field :quantity, min: 1, max:10 %>
-                  <%= cart_item.submit "変更" %>
-                <% end %>
+                  <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
+                    <%= form_with model: @cart_item, url: cart_items, method: :post do %>
+                      <%= cart_item.number_field :quantity, min: 1, max:10 %>
+                      <%= cart_item.submit "変更" %>
+                    <% end %>
 
-                 <!--小計を求めるメソッド＝＝subtotal-->
-                <td>（小計）<%= cart_item.subtotal %></td>
-                <% @total_price += cart_item.subtotal %>
-                <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
-              </tr>
+                   <!--小計を求めるメソッド＝＝subtotal-->
+                  <td>（小計）<%= cart_item.subtotal %></td>
+                  <% @total_price += cart_item.subtotal %>
+                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
+                </tr>
             <% end %>
           </tbody>
         </table>
@@ -48,7 +51,6 @@
           <span>買い物を続ける</span>
         <% end %>
       </div>
-      <!--消費税を求めるメソッド＝＝add_tax_price-->
       <div class="col-8 ">
         <table class="table table-bordered" cellpadding="10">
           <tr>

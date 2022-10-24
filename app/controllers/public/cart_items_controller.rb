@@ -3,9 +3,9 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items=CartItem.all
-    @cart_items_customer = current_customer.cart_item.all
-    @cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
-    @total_price=@cart_items.add_tax_price
+    @cart_items_customer = current_customer.cart_items.all
+    @cart_item = CartItem.find_by(item_id: params[:cart_item])
+    # @total_price=@cart_items.add_tax_price viewで定義しているので不要
   end
   # カート内商品を追加・保存
   def create
@@ -41,8 +41,8 @@ class Public::CartItemsController < ApplicationController
 
   def destroy_all
     @cart_items=CartItem.all
-    cart_items.destroy_all
-    redirect_to request.refere
+    @cart_items.destroy_all
+    redirect_to request.referer
   end
 
   private
