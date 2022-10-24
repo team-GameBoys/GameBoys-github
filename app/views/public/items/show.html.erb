@@ -1,8 +1,9 @@
 <!--カスタマー側の商品詳細ページ-->
+<p id="notice"></p>
 <div class= "container mt-5 mb-5">
   <div class= "row text-center text-xs-center text-sm-left text-md-left" >
     <div class= "col-xs-12 col-sm-12 col-md-6 mx-auto text-right" >
-      <%= image_tag @item.get_image(100,100) %>
+      <%= image_tag @item.get_image(400,400) %>
     </div>
     <div class= "col-xs-12 col-sm-12 col-md-6 item-details mx-auto" >
       <h2>
@@ -13,31 +14,31 @@
       <h4>
         <%= simple_format(@item.introduction) %>
       </h4>
-      
-      
-      
+
+
+
 
       <% if @item.is_active == true %>
         <p class ="text-success">販売中</p>
-        <!--わからん-->
-        <!--ArgumentError in Public::Items#show  wrong number of arguments (given 1, expected 0)-->
         <!--@item.add_tax_price-->
         <!--.to_s(:delimited)は3桁ごとにカンマ区切りで表示してくれる便利なメソッドです-->
-        <h3>¥ <%= @item.price() %> (税込)</h3>
+        <h3>¥ <%= @item.add_tax_price.to_s(:delimited) %> (税込)</h3>
         <p>
           <!--わからん-->
           <!--カートに入れると-->
           <!--参考-->
           <!--https://railsdoc.com/page/form_with-->
-          <%= form_with model: @item do |f| %>
+          <!--modelの指定はcart_itemsにする。そうすることによって、cart_itemsコントローラから持ってくるようになる。-->
+          <%= form_with model: @cart_item,url: cart_items_path, method: :get do |f| %>
             <%= f.hidden_field :item_id, :value=> @item.id  %>
-            <%= f.number_field :amount,placeholder:"個数を選択" %>
+            <!--選択できる数量は0以上にしたい-->
+            <%= f.number_field :quantity, placeholder:"個数選択",min:0 %>
             <%= f.submit "カートに入れる", class: "btn btn-success" %>
           <% end %>
         </p>
       <% else %>
         <h3 class="text-danger">
-        　SOLD OUT!!
+          SOLD OUT!!
         </h3>
       <% end %>
     </div>

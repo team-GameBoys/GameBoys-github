@@ -3,9 +3,9 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items=CartItem.all
-    @cart_items_customer=current_customer
-    # item=CartItem.find_by(item_id: params[:cart_item][:item_id])
-    # @total_price=@cart_items.add_tax_price
+    @cart_items_customer = current_customer.cart_item.all
+    @cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+    @total_price=@cart_items.add_tax_price
   end
   # カート内商品を追加・保存
   def create
@@ -47,7 +47,7 @@ class Public::CartItemsController < ApplicationController
 
   private
   def cart_item_params
-    params.require(:cart_item).permit(:quantity)
+    params.require(:cart_item).permit(:item_id, :price, :quantity)
   end
 
 end

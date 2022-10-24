@@ -1,19 +1,17 @@
 <div class="container-fluid" style="margin: 0px 150px;">
  <div class="row mt-5 ml-5">
-  <div>
-   <h3 style="background-color: #e5e5e5;">注文情報入力</h3>
-  </div>
+   <h2>注文情報入力</h2>
  </div>
  <div class="row mt-3">
   <div class="col-12">
    <h3><strong>支払い方法</strong></h3>
    <div class="mt-3 ml-5">
-    <%= form_with model: @order, method: :post, local: true do |f| %>
+    <%= form_with model: @order, url: confirm_orders_path, method: :post, local: true do |f| %>
      <%= f.radio_button :payment_method, "credit_card", checked: true%>
-     <%= f.label :payment_method, "銀行振込" %>
+     <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
      </br>
      <%= f.radio_button :payment_method, "transfer" %>
-     <%= f.label :payment_method, "クレジット払い" %>
+     <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
    </div>
   </div>
  </div>
@@ -21,13 +19,18 @@
   <div class="col-12">
    <h3><strong>お届け先</strong></h3>
    <div class="mt-3 ml-5">
-     <%= f.radio_button :customer, :customer_deliveries, checked: true%>
-     <%= f.label :customers, "ご自身の住所" %></br>
-     <%= f.radio_button :deliveries, :deliveries %>
-     <%= f.label :deliveries, "登録済住所から選択" %>
+     <%= f.radio_button :select_address, 1 ,checked: true%>
+     <%= f.label :address_select, "ご自身の住所" %>
+    <div style="margin-left: 50px; margin-bottom: 10px;">
+     <%= current_customer.post_code %> <%= current_customer.address %><br>
+     <%= current_customer.first_name + current_customer.last_name %>
+    </div>
+     <%= f.radio_button :select_address, 2 %>
+     <%= f.label :address_select, "登録済住所から選択" %>
+     <%= f.select :delivery_id, options_from_collection_for_select(Delivery.all, :id, :delivery_display), class: "mt-5" %> <!-- 配送先の情報をセレクトボックスで表記　配送先でaddress_displayを作成 -->
      </br>
-     <%= f.radio_button :address_number, 3 %>
-     <%= f.label :address_number_3, "新しいお届け先" %>
+     <%= f.radio_button :select_address, 3 %>
+     <%= f.label :address_select, "新しいお届け先" %>
      <table class="ml-3">
       <tbody>
        <tr>
@@ -40,16 +43,16 @@
        </tr>
        </tr>
         <td><%= f.label :neme, "宛名" %></td>
-        <td><%= f.text_field :address_name %></td>
+        <td><%= f.text_field :name %></td>
        </tr>
       </tbody>
      </table>
-    <% end %>
    </div>
   </div>
  </div>
  <div class="row">
-  <div class="offset-5 col-7">
-   <%= link_to "確認画面へ進む", comfirm_orders_path, class: "btn btn-primary" %></div>
+  <div class="offset-5 col-7 mt-3">
+   <%= f.submit "確認画面へ進む", class: "btn btn-primary" %></div>
   </div>
 </div>
+ <% end %>
