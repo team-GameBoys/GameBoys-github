@@ -3,7 +3,7 @@
    <h2>注文情報入力</h2>
  </div>
   <div class="row">
-   <div class="col-12">
+   <div class="col-8">
     <table class="table table-bordered">
      <thead style="background-color: #e5e5e5;">
       <th>商品名</th>
@@ -11,33 +11,35 @@
       <th>数量</th>
       <th>小計</th>
      </thead>
-    <tbody>
-    <% @cart_items.each do |cart_item| %>
+     <tbody>
+     <% @cart_items.each do |cart_item| %>
+      <tr>
+       <td>（商品名）<%= cart_item.name %></td>
+       <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
+       <td>（数量）<%= cart_item.quantity %></td>
+       <td>（小計）<%= cart_item.subtotal %></td>
+      </tr>
+     <% end %>
+     </tbody>
+    </table>
+   </div>
+   <div class="offset-1 col-3">
+    <table class="table table-bordered">
      <tr>
-      <td>（商品名）<%= cart_item.name %></td>
-      <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
-      <td>（数量）<%= cart_item.quantity %></td>
-      <td>（小計）<%= cart_item.subtotal %></td>
+      <td style="background-color: #e5e5e5;">送料</td>
+      <td>800</td>
      </tr>
-    <% end %>
-    </tbody>
-   </table>
-   <table class="table table-bordered">
-    <tr>
-     <td style="background-color: #e5e5e5;">送料</td>
-     <td>800</td>
-    </tr>
-    <tr>
-     <td style="background-color: #e5e5e5;">商品合計</td>
-     <td>(合計金額)<%#= @total_price %></td>
-    </tr>
-    <tr>
-     <td style="background-color: #e5e5e5;">請求金額</td>
-     <td>(合計金額)<%#= @total_price+.送料 %></td>
-    </tr>
-   </table>
+     <tr>
+      <td style="background-color: #e5e5e5;">商品合計</td>
+      <td>(合計金額)<%#= cart_item.total_price %></td>
+     </tr>
+     <tr>
+      <td style="background-color: #e5e5e5;">請求金額</td>
+      <td>(合計金額)<%#= cart_item.total_price+.800 %></td>
+     </tr>
+    </table>
+   </div>
   </div>
- </div>
   <table>
    <tbody>
     <tr>
@@ -54,5 +56,10 @@
       <%= @order.name %>
      </td>
     </tr>
-   </tbody>
+    <tr>
+     <%= form_with model: @order, url: complete_orders_path, local: true do |f| %>
 
+     <% end %>
+    </tr>
+   </tbody>
+  </table>

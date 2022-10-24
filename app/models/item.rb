@@ -20,7 +20,9 @@ class Item < ApplicationRecord
       image.variant(resize_to_limit: [width, height]).processed
   end
 
+
   #これをコメントアウト外すと商品登録の際にundefined method `quantity'のエラーが出る
   # validates :quantity, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+
 
 end
