@@ -11,9 +11,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    @customer = current_customer
-    @customer.update
-    redirect_to my_page_path
+  
   end
   
   

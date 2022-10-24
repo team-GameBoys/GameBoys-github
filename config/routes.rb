@@ -16,7 +16,7 @@ Rails.application.routes.draw do
    resources :cart_items, only: [:index,:update,:destroy_all,:destroy,:create]
    resources :orders, only: [:index,:show,:new,:comfirm,:complete,:create] do
     collection do
-     get "confirm"
+     post "confirm"
      get "complete"
     end
    end
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+   get "/home/top" => "homes#top"
    resources :genres, only: [:index,:create,:edit,:update]
    resources :items, only: [:index,:new,:create,:show,:edit,:update]
    resources :customers, only: [:index,:show,:edit,:update]
