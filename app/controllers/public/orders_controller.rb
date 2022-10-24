@@ -30,7 +30,19 @@ class Public::OrdersController < ApplicationController
    end
     @cart_items = current_customer.cart_items.all
   end
-
+  
+  def create
+    @order = Order(order_params)
+    @order.save  
+  end
+  
+  def comprete
+  end
+  
+  def index
+    @orders = current_customer.orders
+  end
+  
   private
   def order_params
    params.require(:order).permit(:payment_method, :post_code, :address, :name)
