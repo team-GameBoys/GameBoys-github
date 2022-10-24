@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
    resources :deliveries, only: [:index,:edit,:create,:update,:destory,]
-   resources :customers, only: [:show,:edit,:update,:unsubscribe,:withdraw]
+   resources :customers, only: [:show]
   end
 
   namespace :admin do

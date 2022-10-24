@@ -1,6 +1,6 @@
 <%#= render %>
 <div class="container mt-4 mb-4">
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-5">
       <div class="row">
         <h2 class="px-3">ショッピングカート</h2>
@@ -16,27 +16,28 @@
     <div class="col">
         <table class="table table-bordered">
           <thead style="background-color: #e5e5e5;">
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
-            <th width="118"></th>
+            <th width="300">商品名</th>
+            <th width="118">単価(税込)</th>
+            <th width="120">数量</th>
+            <th width="110">小計</th>
+            <th width="80"></th>
           </thead>
           <tbody>
             <% @total_price = 0 %>
               <% @cart_items.each do |cart_item| %>
                 <tr>
-                  <td>（商品名）<%= cart_item.item.name %></td>
-                  <td>（単価(税込)）<%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
+                  <td width="300"><%= image_tag cart_item.item.get_image(100, 60) %> <%= cart_item.item.name %></td>
+                  <td width="118"><%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
 
-                  <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
-                    <%= form_with model: cart_item, url: cart_items_path, method: :post do |f| %>
+                  <td width="120">
+                    <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch do |f| %>
                       <%= f.number_field :quantity, min: 1, max:10 %>
                       <%= f.submit "変更" %>
                     <% end %>
-                  <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+
+                  <td width="110"><%= cart_item.subtotal.to_s(:delimited) %></td>
                   <% @total_price += cart_item.subtotal %>
-                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger m-auto" %></td>
+                  <td width="80"><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger m-auto" %></td>
                 </tr>
             <% end %>
           </tbody>
@@ -49,11 +50,11 @@
           <span>買い物を続ける</span>
         <% end %>
       </div>
-      <div class="col-8 ">
+      <div class="col-3 offset-5">
         <table class="table table-bordered" cellpadding="10">
           <tr>
-            <td style="background-color: #e5e5e5;"><strong>合計金額</strong></td>
-            <td>(合計金額)<%= @total_price.to_s(:delimited) %></td>
+            <td width="80" style="background-color: #e5e5e5;"><strong>合計金額</strong></td>
+            <td width="70"><%= @total_price.to_s(:delimited) %></td>
           </tr>
         </table>
       </div>
