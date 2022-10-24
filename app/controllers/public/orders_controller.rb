@@ -30,7 +30,29 @@ class Public::OrdersController < ApplicationController
    end
     @cart_items = current_customer.cart_items.all
   end
-
+  
+  def create
+    @order = Order.new(order_params)
+    @order = current_customer.orders.new(order_params)
+    @order.save
+    cart_items.each do |cart|
+     order_item = OrderItem.new
+     order_item.order_id = order.id
+     order_item.item_id = cart_item_id
+     order_item.order_quantity = cart_items.quantity
+     order_item.order_price = cart_item.price
+     order_item.save
+    end
+     current_user.cart_items.destroy_all
+  end
+  
+  def comprete
+  end
+  
+  def index
+    @orders = current_customer.orders
+  end
+  
   private
   def order_params
    params.require(:order).permit(:payment_method, :post_code, :address, :name)
