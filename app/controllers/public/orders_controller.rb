@@ -1,11 +1,17 @@
 class Public::OrdersController < ApplicationController
   # 注文情報入力画面から作る郵便番号や宛名、住所を保存する
-  # binding.pry
   def new
-    @order = Order.new
+    @orders = Order.new
   end
 
-  def confirm
+  # 購入確定
+  def create
+
+    order.save
+    redirect_to 'orders/complete'
+  end
+
+  def check
     @order = Order.new(order_params)
     # new 画面から渡ってきたデータを @order に入れる
    if params[:order][:select_address] == "1"
@@ -23,13 +29,13 @@ class Public::OrdersController < ApplicationController
       # deliveriesの配送先住所を保存する
    elsif params[:order][:select_address] == "3"
       # view で定義しているselect_address 3 を選択した場合
-    @order.post_code = params([:order][:post_code])
-    @order.address = params([:order][:address])
-    @order.name = params([:order][:name])
-     # new/viewで作ったフォームから保存する
+      # new/viewで作ったフォームを送る
    end
     @cart_items = current_customer.cart_items.all
   end
+
+  def index
+    @orders = Order.all
 
   def create
     @order = Order.new(order_params)
@@ -48,6 +54,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def complete
+
   end
 
   def index
@@ -59,4 +66,9 @@ class Public::OrdersController < ApplicationController
    params.require(:order).permit(:payment_method, :post_code, :address, :name)
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
+ end
 end
