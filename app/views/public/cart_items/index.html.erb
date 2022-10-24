@@ -20,35 +20,40 @@
             <th>単価(税込)</th>
             <th>数量</th>
             <th>小計</th>
-            <th></th>
+            <th width="118"></th>
           </thead>
           <tbody>
             <% @total_price = 0 %>
               <% @cart_items.each do |cart_item| %>
                 <tr>
-                  <td>（商品名）<%= cart_item.item.name %></td>
-                  <td>（単価(税込)）<%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
+                  <td>
+                    <%= image_tag cart_item.item.get_image(100, 60) %>
+                    <%= cart_item.item.name %>
+                  </td>
+                  <td width="200"><%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
 
-                  <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
-                    <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-                      <%#= f.number_field :quantity, min: 1, max:10 %>
-                      <select name="数量">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                      </select>
+                  <td width="200">
+                     <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+                     <%= cart_item.quantity %>＋<%= f.number_field :quantity, min: 1, max:10 %>.to_i
+
+
+                      <!--<select name="数量">-->
+                      <!--  <option value="1">1</option>-->
+                      <!--  <option value="2">2</option>-->
+                      <!--  <option value="3">3</option>-->
+                      <!--  <option value="4">4</option>-->
+                      <!--  <option value="5">5</option>-->
+                      <!--  <option value="6">6</option>-->
+                      <!--  <option value="7">7</option>-->
+                      <!--  <option value="8">8</option>-->
+                      <!--  <option value="9">9</option>-->
+                      <!--  <option value="10">10</option>-->
+                      <!--</select>-->
                       <%= f.submit "変更", class: "btn btn-success" %>
                     <% end %>
                   <td><%= cart_item.subtotal.to_s(:delimited) %></td>
                   <% @total_price += cart_item.subtotal %>
-                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
+                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger m-auto" %></td>
                 </tr>
             <% end %>
           </tbody>
