@@ -47,7 +47,7 @@ class Public::OrdersController < ApplicationController
     current_user.cart_items.destroy_all
   end
 
-  def comprete
+  def complete
   end
 
   def index
