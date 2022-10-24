@@ -1,5 +1,5 @@
 <%#= render %>
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
   <div class="row">
     <div class="col-5">
       <div class="row">
@@ -20,7 +20,7 @@
             <th>単価(税込)</th>
             <th>数量</th>
             <th>小計</th>
-            <th></th>
+            <th width="118"></th>
           </thead>
           <tbody>
             <% @total_price = 0 %>
@@ -34,11 +34,9 @@
                       <%= f.number_field :quantity, min: 1, max:10 %>
                       <%= f.submit "変更" %>
                     <% end %>
-
-                   <!--小計を求めるメソッド＝＝subtotal-->
-                  <td>（小計）<%= cart_item.subtotal %></td>
+                  <td><%= cart_item.subtotal.to_s(:delimited) %></td>
                   <% @total_price += cart_item.subtotal %>
-                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
+                  <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger m-auto" %></td>
                 </tr>
             <% end %>
           </tbody>
@@ -55,7 +53,7 @@
         <table class="table table-bordered" cellpadding="10">
           <tr>
             <td style="background-color: #e5e5e5;"><strong>合計金額</strong></td>
-            <td>(合計金額)<%= @total_price %></td>
+            <td>(合計金額)<%= @total_price.to_s(:delimited) %></td>
           </tr>
         </table>
       </div>
