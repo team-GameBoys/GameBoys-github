@@ -12,12 +12,14 @@
       <th>小計</th>
      </thead>
      <tbody>
+     <% @total_price = 0 %>
      <% @cart_items.each do |cart_item| %>
       <tr>
-       <td>（商品名）<%= cart_item.name %></td>
-       <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
-       <td>（数量）<%= cart_item.quantity %></td>
-       <td>（小計）<%= cart_item.subtotal %></td>
+       <td><%= cart_item.item.name %></td>
+       <td><%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
+       <td><%= cart_item.quantity %></td>
+       <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+       <% @total_price += cart_item.subtotal %>
       </tr>
      <% end %>
      </tbody>
@@ -31,11 +33,11 @@
      </tr>
      <tr>
       <td style="background-color: #e5e5e5;">商品合計</td>
-      <td>(合計金額)<%#= cart_item.total_price %></td>
+      <td><%= @total_price.to_s(:delimited) %></td>
      </tr>
      <tr>
       <td style="background-color: #e5e5e5;">請求金額</td>
-      <td>(合計金額)<%#= cart_item.total_price+.800 %></td>
+      <td><%= @total_price.+800 %></td>
      </tr>
     </table>
    </div>
@@ -45,7 +47,7 @@
     <tr>
      <td><strong>支払い方法</h5></td>
      <td width="10"></td>
-     <td margin-left="200" height="100"><%= @order.payment_method %></td>
+     <td margin-left="200" height="100"><%= @order.payment_method_i18n %></td>
     </tr>
     <tr>
      <td><strong>お届け先</td>
