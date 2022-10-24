@@ -24,7 +24,7 @@
             <% @cart_items.each do |cart_item| %>
               <tr>
                 <td>（商品名）<%= cart_item.name %></td>
-                <td>（単価(税込)）<%= cart_item.add_tax_price.floor %></td>
+                <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
 
                 <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
                 <%= form_with model: @cart_item, url: cart_items, method: :post do %>
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div>
-      <%= link_to orders_path, method: :get, class: "btn btn-success" do %>
+      <%= link_to new_order_path, method: :get, class: "btn btn-success" do %>
         <span>情報入力画面に進む</span>
       <% end %>
     </div>

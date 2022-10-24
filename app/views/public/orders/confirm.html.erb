@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="row mt-5 ml-5">
+   <h2>注文情報入力</h2>
+ </div>
+  <div class="row">
+   <div class="col-12">
+    <table class="table table-bordered">
+     <thead style="background-color: #e5e5e5;">
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+     </thead>
+    <tbody>
+    <% @cart_items.each do |cart_item| %>
+     <tr>
+      <td>（商品名）<%= cart_item.name %></td>
+      <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
+      <td>（数量）<%= cart_item.quantity %></td>
+      <td>（小計）<%= cart_item.subtotal %></td>
+     </tr>
+    <% end %>
+    </tbody>
+   </table>
+   <table class="table table-bordered">
+    <tr>
+     <td style="background-color: #e5e5e5;">送料</td>
+     <td>800</td>
+    </tr>
+    <tr>
+     <td style="background-color: #e5e5e5;">商品合計</td>
+     <td>(合計金額)<%#= @total_price %></td>
+    </tr>
+    <tr>
+     <td style="background-color: #e5e5e5;">請求金額</td>
+     <td>(合計金額)<%#= @total_price+.送料 %></td>
+    </tr>
+   </table>
+  </div>
+ </div>
+  <table>
+   <tbody>
+    <tr>
+     <td><strong>支払い方法</h5></td>
+     <td width="10"></td>
+     <td margin-left="200" height="100"><%= @order.payment_method %></td>
+    </tr>
+    <tr>
+     <td><strong>お届け先</td>
+     <td></td>
+     <td>
+     〒<%= @order.post_code %>
+      <%= @order.address %>
+      <%= @order.name %>
+     </td>
+    </tr>
+   </tbody>
+
