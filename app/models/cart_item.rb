@@ -11,5 +11,9 @@ class CartItem < ApplicationRecord
       (self.price * 1.1).round
   end
 
+  def delivery_display
+   '〒' + post_code + ' ' + address + ' ' + name
+  end
+
 
 end

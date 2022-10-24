@@ -1,5 +1,5 @@
 <%#= render %>
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
   <div class="row">
     <div class="col-5">
       <div class="row">
@@ -26,17 +26,27 @@
             <% @total_price = 0 %>
               <% @cart_items.each do |cart_item| %>
                 <tr>
-                  <td>（商品名）<%= cart_item.name %></td>
-                  <td>（単価(税込)）<%= cart_item.add_tax_price.floor.to_s(:delimited) %></td>
+                  <td>（商品名）<%= cart_item.item.name %></td>
+                  <td>（単価(税込)）<%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
 
                   <td>（数量）<%= cart_item.quantity %>＋（セレクト機能）.to_i>
-                    <%= form_with model: @cart_item, url: cart_items, method: :post do %>
-                      <%= cart_item.number_field :quantity, min: 1, max:10 %>
-                      <%= cart_item.submit "変更" %>
+                    <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+                      <%#= f.number_field :quantity, min: 1, max:10 %>
+                      <select name="数量">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                      <%= f.submit "変更", class: "btn btn-success" %>
                     <% end %>
-
-                   <!--小計を求めるメソッド＝＝subtotal-->
-                  <td>（小計）<%= cart_item.subtotal %></td>
+                  <td><%= cart_item.subtotal.to_s(:delimited) %></td>
                   <% @total_price += cart_item.subtotal %>
                   <td><%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn btn-danger" %></td>
                 </tr>
@@ -55,7 +65,7 @@
         <table class="table table-bordered" cellpadding="10">
           <tr>
             <td style="background-color: #e5e5e5;"><strong>合計金額</strong></td>
-            <td>(合計金額)<%= @total_price %></td>
+            <td>(合計金額)<%= @total_price.to_s(:delimited) %></td>
           </tr>
         </table>
       </div>
