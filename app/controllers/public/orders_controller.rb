@@ -23,10 +23,7 @@ class Public::OrdersController < ApplicationController
       # deliveriesの配送先住所を保存する
    elsif params[:order][:select_address] == "3"
       # view で定義しているselect_address 3 を選択した場合
-    @order.post_code = params([:order][:post_code])
-    @order.address = params([:order][:address])
-    @order.name = params([:order][:name])
-     # new/viewで作ったフォームから保存する
+      # new/viewで作ったフォームを送る
    end
     @cart_items = current_customer.cart_items.all
   end
@@ -47,7 +44,8 @@ class Public::OrdersController < ApplicationController
     current_user.cart_items.destroy_all
   end
 
-  def comprete
+  def complete
+    
   end
 
   def index
