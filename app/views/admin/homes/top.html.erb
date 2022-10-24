@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2>注文履歴一覧</h2>
+    </div>
+    <div class="row">
+      <div class="col-sm-10 px-sm-0 mx-auto mb-5">
+        <table class="table text-center admin-items mb-5">
+          <thead>
+            <tr>
+              <th>購入日時</th>
+              <th>購入者</th>
+              <th>注文個数</th>
+              <th>注文ステータス</th>
+            </tr>
+          </thead>
+          <%= @order.each do |order| %>
+          <tbody>
+            <tr>
+              <td class="aligin-middle">
+                <!--%= link_to do %>-->
+                  <!--<u>%= order.created_at %></u>-->
+                <!--% end %>-->
+              </td>
+              <!--<td class="align-middle">%= order.name %></td>-->
+              <td class="align-middle">
+                <!--%= 注文個数 %>-->
+              </td>
+              <td class="align-middle">
+                <!--%= 注文ステータス %>-->
+              </td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

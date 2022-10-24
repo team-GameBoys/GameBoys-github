@@ -1,0 +1,101 @@
+<!--管理者側の商品編集ページ-->
+<p id="notice"></p>
+<div class = "d-flex flex-row bd-highlight mb-3">
+  <div class="p-2 bd-highlight">
+    <div class= "p-2 bg-light border">
+      <h2>商品編集</h2>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 px-sm-0 mx-auto">
+      <%= form_with model: @item, url: admin_item_path, local: true do |f| %>
+        <table>
+          <tr>
+            <div class="form-group">
+              <th>
+                <%=f.label :商品画像 %>
+              </th>
+              <th>
+                <%= f.file_field :image,accept: 'image/*' %>
+              </th>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>
+                <%= f.label :商品名 %>
+              </th>
+              <td>
+                <%= f.text_field :name,placeholder:"商品名" %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>
+                <%= f.label :商品説明 %>
+              </th>
+              <td>
+                <%= f.text_area :introduction, size: "100*5", placeholder:"ここに説明文を記述します" %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>
+                <%= f.label :ジャンル %>
+              </th>
+              <td>
+                <!--セレクトボックスを作るための記述-->
+                <!--= f.collection_select カラム名, 要素の配列, value属性の項目, テキストの項目, { prompt: "選択してください" } -->
+                <!--@genre_all（インスタンス変数）にgenreの情報をallで入れておく-->
+                <!--要素のvalueでidを付与したいので、value属性の項目箇所は:idにする-->
+                <!--テキストではnameで表示したいので、テキストの項目箇所は:nameにする-->
+                <%= f.collection_select :genre_id, @genre_all, :id, :name, {prompt:  "--選択してください--"},selected: "genre_id" %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>
+                <%= f.label :税抜価格 %>
+              </th>
+              <td>
+                <%= f.text_field :price, placeholder: "1,000" %>円
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-group">
+              <th>
+                <%= f.label :販売ステータス %>
+              </th>
+              <td>
+                <%= f.radio_button :is_active, true, checked: true %>
+                <%= f.label :is_active, "販売中" %>
+                <%= f.radio_button :is_active, false %>
+                <%= f.label :is_active, "販売停止中" %>
+              </td>
+            </div>
+          </tr>
+
+          <tr>
+            <div class="form-action">
+              <td>
+                <%= f.submit "変更する", class:"btn btn-success" %>
+              </td>
+            </div>
+          </tr>
+
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
