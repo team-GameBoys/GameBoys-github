@@ -1,5 +1,5 @@
 class Public::DeliveriesController < ApplicationController
-
+ before_action :authenticate_customer!
   def index
     @delivery = Delivery.new
     @deliveries = Delivery.all
@@ -23,7 +23,7 @@ class Public::DeliveriesController < ApplicationController
     delivery = Delivery.find(params[:id])
     delivery.update(delivery_params)
     redirect_to deliveries_path
-  
+
   end
 
   def destroy
