@@ -4,7 +4,7 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #バイデーションはいらない  
+  #バリデーションはいらない  
   # validates :genre_id, presence: true
   # validates :name, presence: true
   # validates :introduction, presence: true

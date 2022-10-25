@@ -1,19 +1,48 @@
-<div class="container mt-5">
+<div class="container mt-3">
  <div class="row">
-  <div class="col-4">
-   <p>q</p>
+  <div class="col-2">
+    <!--(検索機能)-->
   </div>
-  <div class="bg-dark text-white">
-   <div class="co-8">
-	  <p>ようこそ、ながのCAKEへ！</br>
+  <div class="col-10 mb-4 mt-2">
+   <div id="image" class="mb-2 mb-0 p-5 col-9">
+	  <p class="ml-5" style="text-align: center;">ようこそ、ながのCAKEへ！</br>
 	   このサイトは、ケーキ販売のECサイトになります。</br>
 	   会員でない方も商品の閲覧はできますが、</br>
 	   購入には会員登録が必要になります。
 	  </p>
 	 </div>
+	  <div class="row">
+     <h2 class= "px-3">新着商品</h2>
+    </div>
+    <div class="row">
+
+      <% @items.each do |item| %>
+      <div class="col-xs-10 col-sm-10 col-md-6 col-lg-3 mx-">
+        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
+          <%= link_to item_path(item) do %>
+            <p class="img-wrap">
+              <%= image_tag item.get_image(200,200) %>
+            </p>
+          <% end %>
+
+          <div class="card-body pl-0">
+            <p class="item-details item-name card-text">
+              <%= item.name %>
+            </p>
+
+            <% if item.is_active == true %>
+              <!--.to_s(:delimited)は3桁ごとにカンマ区切りで表示してくれる便利なメソッドです-->
+              <p class="item-details card-text"><%= item.add_tax_price.to_s(:delimited) %>円</p>
+            <% else %>
+              <p class="text-danger font-weight-bold card-text">SOLD OUT!!</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
  </div>
-  <div class="offset-3 col-8">
-   <h2>新着商品</h2>
-  </div>
+
+    </div>
+   <p class="my-0" style="text-align: end;"><%= link_to "全ての商品を見る>", items_path %></p>
 </div>

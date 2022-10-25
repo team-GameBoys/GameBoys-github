@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :authenticate_customer!, except: [:top, :about]
-  # before_action :authenticate_admin!, except: [:top, :about]
+  before_action :authenticate_customer!, except: [:top, :about], unless: :admin_signed_in?
+  before_action :authenticate_admin!, except: [:top, :about], unless: :customer_signed_in?
 
   def after_sign_up_path_for(resource)
     items_path

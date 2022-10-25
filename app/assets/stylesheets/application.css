@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+ #image {
+  background-size: cover;
+  background-image: url("cake-g7865926f6_640.jpg");
+}
+
+ /*#image {*/
+ /*  position: relative;*/
+
+ /*}*/
+
+ #image p {
+   color: rgba(250,250,250,0.8);
+ }
