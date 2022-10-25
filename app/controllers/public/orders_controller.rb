@@ -1,10 +1,10 @@
 class Public::OrdersController < ApplicationController
   # 注文情報入力画面から作る郵便番号や宛名、住所を保存する
   def new
-    @orders = Order.new
+    @order = Order.new
   end
 
-  def check
+  def confirm
     @order = Order.new(order_params)
     # new 画面から渡ってきたデータを @order に入れる
    if params[:order][:select_address] == "1"
@@ -27,10 +27,9 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
   end
 
-  def index
+  def create
     @orders = Order.all
   end
-
   def create
     @order = Order.new(order_params)
     @order = current_customer.orders.new(order_params)
@@ -48,7 +47,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def complete
-
   end
 
   def index
@@ -64,5 +62,5 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
- end
 end
+
