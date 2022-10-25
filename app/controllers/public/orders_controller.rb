@@ -4,13 +4,6 @@ class Public::OrdersController < ApplicationController
     @orders = Order.new
   end
 
-  # 購入確定
-  def create
-
-    order.save
-    redirect_to 'orders/complete'
-  end
-
   def check
     @order = Order.new(order_params)
     # new 画面から渡ってきたデータを @order に入れる
@@ -36,6 +29,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+  end
 
   def create
     @order = Order.new(order_params)

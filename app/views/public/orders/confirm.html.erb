@@ -60,7 +60,7 @@
     </tr>
     <tr>
      <td>
-      <%= form_with model: @order, url: complete_orders_path, method: :post, local: true do |f| %>
+      <%= form_with model: @order, url: orders_path, local: true do |f| %>
        <!--% hidden_field %>-->
        <%= f.submit "注文を確認する", class: "btn btn-primary" %>
       <% end %>
