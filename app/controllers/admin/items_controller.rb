@@ -34,8 +34,7 @@ class Admin::ItemsController < ApplicationController
       # とりあえずインデックスに飛ばす。本当は、商品詳細に飛ばしたい。
     else
       @items = Item.all
-      flash.now[:danger] = "itemの作成に失敗しました"
-      render 'new'
+      render 'new', notice: "itemの作成に失敗しました"
     end
   end
 
