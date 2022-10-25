@@ -1,7 +1,12 @@
 <!--管理者側の商品一覧ページ-->
 <p id="notice"></p>
-<div class="container">
+<!--フラッシュメッセージ-->
+<% if flash[:notice] %>
+  <div class = "alert alert-success ">
+    <p class = "pt-3 text-center" ><%= notice %></p></div>
+<% end %>
 
+<div class="container">
   <div class="row">
     <h2 class="px-3">商品一覧</h2>
   </div>
