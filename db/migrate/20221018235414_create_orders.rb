@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
     create_table :orders do |t|
 
       t.references :customer, foreign_key: true,  null: false
-      t.integer :postage, null: false
+      
       t.integer :payment_method, null: false, default: 0
       t.string :post_code, null: false
       t.string :address, null: false

@@ -32,10 +32,10 @@
                 <%= customer.email %>
               </td>
               <td>
-                <% if customer.is_active == 'effectiveness' %>
-                  <%= customer.is_active %>
+                <% if customer.is_active == true %>
+                  <p>有効</p>
                 <% else %>
-                  <%= customer.is_active == 'withdrawal' %>
+                  <p>退会</p>
                 <% end %>
               </td>
             </tr>

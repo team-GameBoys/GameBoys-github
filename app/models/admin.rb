@@ -4,9 +4,11 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #バリデーションはいらない  
   # validates :genre_id, presence: true
   # validates :name, presence: true
   # validates :introduction, presence: true
+  
   # もし写真を持っていなかったらunless、持ってたらその写真を表示
   # def get_image(width, height)
   #   unless image.attached?

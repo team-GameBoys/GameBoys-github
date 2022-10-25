@@ -1,7 +1,8 @@
 class Admin::HomesController < ApplicationController
-  
-def index
-  @orders = orders.all
+  before_action :authenticate_admin!
+
+def top
+ @order_items = OrderItem.all
 end
 
 
