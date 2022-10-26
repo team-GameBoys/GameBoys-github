@@ -1,4 +1,28 @@
 <!--カスタマー側の商品詳細ページ-->
+
+
+<!--ジャンル検索機能追加-->
+<table>
+  <div>
+    ジャンル検索
+  </div>
+  <%= form_tag items_path,method: :get do %>
+    <% @genres.each do |genre| %>
+      <tr>
+        <!--ジャンルごとのアイテム一覧に飛ばしたい-->
+          <td>
+            <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
+            <%= link_to items_path(genre_id: genre.id) do %>
+              <%= genre.name %>
+            <% end %>
+          </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+<!--ジャンル検索機能ここで終わり-->
+
+
 <p id="notice"></p>
 <div class= "container mt-5 mb-5">
   <div class= "row text-center text-xs-center text-sm-left text-md-left" >
