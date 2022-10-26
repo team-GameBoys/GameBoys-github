@@ -12,7 +12,6 @@
       <%= link_to "編集する",edit_path, class:"btn btn-success btn-block" %>
     </div>
     </div>
-    <div class="row">
       <table class="col-md-9 table table-bordered">
         <tbody>
           <tr>
@@ -41,21 +40,20 @@
           </tr>
         </tbody>
       </table>
-      </div>
       <div class="row">
         <div class="col-sm-2 py-1 mt-2">
           <h5><strong>配送先</strong></h5>
         </div>
-        <div class="col-sm-2 py-1 px-0">
-          <%= link_to "一覧を見る", deliveries_path, class: "btn btn-primary btn-block" %>
+          <div class="col-sm-2 py-1 px-0">
+            <%= link_to "一覧を見る", deliveries_path, class: "btn btn-primary btn-block" %>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2 py-1 mt-2">
-          <h5><strong>注文履歴</strong></h5>
-        </div>
-      <div class="col-sm-2 py-1 px-0">
-        <%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-block" %>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-sm-2 py-1 mt-2">
+              <h5><strong>注文履歴</strong></h5>
+            </div>
+            <div class="col-sm-2 py-1 px-0">
+              <%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-block" %>
+            </div>
+  </div>
 </div>

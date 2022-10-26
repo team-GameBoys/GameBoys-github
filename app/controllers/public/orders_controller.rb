@@ -5,14 +5,10 @@ class Public::OrdersController < ApplicationController
   end
 
   # 購入確定
-  #def create
-
-    #order.save
-    #redirect_to 'orders/complete'
-  #end
 
   def confirm
     @order = Order.new(order_params)
+    @total_payment = 0
     # new 画面から渡ってきたデータを @order に入れる
    if params[:order][:select_address] == "1"
       # view で定義しているselect_address 1 を選択した場合
@@ -32,12 +28,9 @@ class Public::OrdersController < ApplicationController
       # new/viewで作ったフォームを送る
    end
     @cart_items = current_customer.cart_items.all
+    @total_payment = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 
-  def index
-    @orders = Order.all
-  end
-  
 
   def show
     @order = Order.find(params[:id])
@@ -48,20 +41,19 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order = current_customer.orders.new(order_params)
     @order.save
-    cart_items.each do |cart|
+    current_customer.cart_items.each do |cart_item|
      @order_item = OrderItem.new
-     @order_item.order_id = order.id
-     @order_item.item_id = cart_item_id
-     @order_item.order_name = cart_item.name
-     @order_item.order_quantity = cart_items.quantity
-     @order_item.order_price = cart_item.price
+     @order_item.order_id = @order.id
+     @order_item.item_id = cart_item.item_id
+     @order_item.quantity = cart_item.quantity
+     @order_item.price = cart_item.item.add_tax_price
      @order_item.save
     end
-    current_user.cart_items.destroy_all
+    current_customer.cart_items.destroy_all
+    redirect_to complete_orders_path
   end
 
   def complete
-
   end
 
   def index
@@ -70,7 +62,7 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-   params.require(:order).permit(:payment_method, :post_code, :address, :name)
+   params.require(:order).permit(:payment_method, :post_code, :address, :name, :total_payment)
   end
-
 end
+
