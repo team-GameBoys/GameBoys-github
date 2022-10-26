@@ -1,10 +1,32 @@
 <!--カスタマー側の商品一覧ページ-->
+
+<!--ジャンル検索-->
+<table>
+  <div>
+    ジャンル検索
+  </div>
+  <%= form_tag items_path,method: :get do %>
+    <% @genres.each do |genre| %>
+      <tr>
+        <!--ジャンルごとのアイテム一覧に飛ばしたい-->
+          <td>
+            <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
+            <%= link_to items_path(genre_id: genre.id) do %>
+              <%= genre.name %>
+            <% end %>
+          </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+
 <p id="notice"></p>
 <div class="container">
   <div class="row">
     <div class="col-sm-12 px-sm-0">
       <div class="row">
-        <h2 class="px-3"><strong>商品一覧</strong>(全<%= @items.count %>件)</h2>
+        <h2 class="px-3"><strong><%= @genre_name %>商品一覧</strong>(全<%= @items.count %>件)</h2>
       </div>
     </div>
   </div>
