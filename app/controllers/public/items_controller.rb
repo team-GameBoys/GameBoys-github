@@ -1,5 +1,5 @@
 class Public::ItemsController < ApplicationController
-
+ before_action :authenticate_customer!, except: [:index]
   def index
     @item = Item.new
     # presentでparams[:genre_id]があった場合、Genre.find(params[:genre_id])なかったら、（デフォルト）でItem.all
