@@ -1,14 +1,83 @@
-<div class="container mt-4">
-  <div class="row mt-5 ml-5">
+<div class="container">
+  <div class="row mb-2 ml-5">
    <h2>注文情報確認画面</h2>
- </div>
+  </div>
   <div class="row">
    <div class="col-8">
     <table>
-     <thead>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-     </thead>
-     <tbody>
+     <tr>
+      <td><h5><strong>購入者</strong></h5></td>
+      <td width="100"></td>
+      <td><%= @order.name %></td>
+     </tr>
+     <tr>
+      <td><h5><strong>注文日</strong></h5></td>
+      <td width="100"></td>
+      <td><%= @order.created_at %></td>
+     </tr>
+     <tr>
+      <td><h5><strong>配送先</strong></h5></td>
+      <td width="100"></td>
+      <td><%= @order.post_code %> <%= @order.address %></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td width="100"></td>
+      <td><%= @order.name %></td>
+     </tr>
+     <tr>
+      <td><h5><strong>支払方法</strong></h5></td>
+      <td width="100"></td>
+      <td><%= @order.payment_method_i18n %></td>
+     </tr>
+     <!--<tr>-->
+     <!-- <td></td>-->
+     <!-- <td></td>-->
+     <!--</tr>-->
+    </table>
+  <div class="row">
+   <div class="col-8">
+    <table class="table text-center admin-items mt-5 mb-5">
+     <tr class="aligin-middle">
+      <td>商品名</td>
+      <td>単価(税込)</td>
+      <td>数量</td>
+      <td>小計</td>
+      <!--<td>製作ステータス</td>-->
+     </tr>
+    <% @order.order_items.each do |order_item| %>
+     <% total_price = 0 %>
+     <tr>
+      <td><%= order_item.item.name %></td>
+      <td><%= order_item.price %></td>
+      <td><%= order_item.quantity %></td>
+      <% @order.order_items.each do |order_item| %>
+       <% total_price += order_item.item.add_tax_price * order_item.quantity %>
+      <% end %>
+      <td><%= total_price %></td>
+      <!--<td></td>-->
+     <tr>
+    <% end %>
+    </table>
+   </div>
+   <div class="offset-1 col-3">
+    <table class="mt-5">
+     <tr>
+      <td height="55"></td>
+      <td></td>
+     </tr>
+     <tr>
+      <td width="120"><strong>送料</strong></td>
+      <td>800</td>
+     </tr>
+     <tr>
+      <td><strong>商品合計</strong></td>
+      <td><%= @order.total_payment.to_s(:delimited) %></td>
+     </tr>
+     <tr>
+      <td><strong>請求金額合計</strong></td>
+      <td><%= @order.total_payment.+800 %></td>
+     </tr>
+    </table>
+   </div>
+  </div>
