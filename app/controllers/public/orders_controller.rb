@@ -5,11 +5,11 @@ class Public::OrdersController < ApplicationController
   end
 
   # 購入確定
-  def create
+  #def create
 
-    order.save
-    redirect_to 'orders/complete'
-  end
+    #order.save
+    #redirect_to 'orders/complete'
+  #end
 
   def confirm
     @order = Order.new(order_params)
@@ -37,9 +37,11 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
+  
 
   def show
     @order = Order.find(params[:id])
+    @total = 0
   end
 
   def create
@@ -50,7 +52,7 @@ class Public::OrdersController < ApplicationController
      @order_item = OrderItem.new
      @order_item.order_id = order.id
      @order_item.item_id = cart_item_id
-     @order_item.order_name = cart_itemm.name
+     @order_item.order_name = cart_item.name
      @order_item.order_quantity = cart_items.quantity
      @order_item.order_price = cart_item.price
      @order_item.save
