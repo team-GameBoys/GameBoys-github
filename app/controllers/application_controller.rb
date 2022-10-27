@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_up_path_for(resource)
-    items_path
+    my_page_path(current_customer.id)
   end
 
   def after_sign_in_path_for(resource_or_scope)
@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     items_path
   end
   end
+
+  def after_sign_out_path_for(resource)
+    admin_session_path
+  end
+
 
   protected
   def configure_permitted_parameters

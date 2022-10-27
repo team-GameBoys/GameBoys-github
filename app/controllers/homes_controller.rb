@@ -15,7 +15,7 @@ class HomesController < ApplicationController
       @genre_items = @genre.items
     else
       @genre_name = nil
-      @items = Item.all
+      # @items = Item.all
 
     end
   end
