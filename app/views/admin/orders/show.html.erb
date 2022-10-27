@@ -1,4 +1,4 @@
-<div class="container">
+ <div class="container">
   <div class="row mb-2 ml-5">
    <h2>注文情報確認画面</h2>
   </div>
@@ -30,11 +30,23 @@
       <td width="100"></td>
       <td><%= @order.payment_method_i18n %></td>
      </tr>
-     <!--<tr>-->
-     <!-- <td></td>-->
-     <!-- <td></td>-->
-     <!--</tr>-->
+     <tr>
+      <td><h5><strong>注文ステータス</strong></h5></td>
+      <td width="100"></td>
+      <td>
+       <% if @order.status == 1 %>
+         <%= form.select :@order_item.making_status == 1 %>
+        <% else %>
+        <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+         <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]}, {}, {class: "status"} %>
+         <%= f.submit "更新" , class: "btn btn-outline-success" %>
+        <% end %>
+       <% end %>
+      </td>
+     </tr>
     </table>
+   </div>
+  </div>
   <div class="row">
    <div class="col-8">
     <table class="table text-center admin-items mt-5 mb-5">
@@ -43,7 +55,7 @@
       <td>単価(税込)</td>
       <td>数量</td>
       <td>小計</td>
-      <!--<td>製作ステータス</td>-->
+      <td>製作ステータス</td>
      </tr>
     <% @order.order_items.each do |order_item| %>
      <% total_price = 0 %>
@@ -51,11 +63,12 @@
       <td><%= order_item.item.name %></td>
       <td><%= order_item.price %></td>
       <td><%= order_item.quantity %></td>
-      <% @order.order_items.each do |order_item| %>
-       <% total_price += order_item.item.add_tax_price * order_item.quantity %>
-      <% end %>
+       <% total_price = order_item.item.add_tax_price * order_item.quantity %>
       <td><%= total_price %></td>
-      <!--<td></td>-->
+      <%= form_with model: order_item, url: admin_making_status_path(order_item.id), method: :patch, local: true do |f| %>
+       <td><%= f.select :making_status, OrderItem.making_statuses.keys.map {|k| [I18n.t("enums.order_item.making_status.#{k}"), k]}, {} , {class: "making_status-select"} %></td>
+       <td><%= f.submit "更新", class: "btn btn-outline-success" %></td>
+      <% end %>
      <tr>
     <% end %>
     </table>
@@ -81,3 +94,4 @@
     </table>
    </div>
   </div>
+ </div>
