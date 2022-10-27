@@ -6,33 +6,38 @@
   </div>
     <div class="row">
       <div class="col-sm-10 px-sm-0 mx-auto mb-5">
+
         <table class="table text-center admin-items mb-5">
           <thead>
             <tr>
               <th>購入日時</th>
               <th>購入者</th>
               <th>注文個数</th>
-              <!--<th>注文ステータス</th>-->
+              <th>注文ステータス</th>
             </tr>
           </thead>
-          <% @order_items.each do |order| %>
           <tbody>
+            <% @order.reverse.each do |order| %>
             <tr>
-              <td class="aligin-middle">
+              <td>
                 <%= link_to admin_order_path(order.id) do %>
                   <u><%= order.created_at %></u>
                 <% end %>
               </td>
-              <td class="align-middle"><%= order.name %></td>
-              <td class="align-middle">
-                <%= order.quantity %>
+              <td ><%= order.name %></td>
+              <td>
+              <% total_quantity = 0 %>
+               <% order.order_items.each do |order_item| %>
+                <% total_quantity += order_item.quantity %>
+               <% end %>
+              <%= total_quantity %>
               </td>
-              <!--<td class="align-middle">-->
-                <!--%= 注文ステータス %>-->
-              <!--</td>-->
+              <td class="align-middle">
+                <%= order.status_i18n %>
+              </td>
             </tr>
+            <% end %>
           </tbody>
-          <% end %>
         </table>
       </div>
     </div>
