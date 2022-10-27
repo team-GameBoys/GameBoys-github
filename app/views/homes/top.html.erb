@@ -1,7 +1,26 @@
 <div class="container mt-3">
- <div class="row">
-  <div class="col-2">
-    <!--(検索機能)-->
+ <div class="row mt-4">
+  <div class="col-2 mt-4 pl-0">
+    <table class="table">
+        <thead>
+          <th>
+            ジャンル検索
+          </th>
+        </thead>
+        <%= form_tag items_path,method: :get do %>
+          <% @genres.each do |genre| %>
+            <tr>
+              <!--ジャンルごとのアイテム一覧に飛ばしたい-->
+                <td>
+                  <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
+                  <%= link_to items_path(genre_id: genre.id) do %>
+                    <%= genre.name %>
+                  <% end %>
+                </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
   </div>
   <div class="col-10 mb-4 my-4">
    <div id="top_image" class="mb-2 mb-0 p-5 col-9">
