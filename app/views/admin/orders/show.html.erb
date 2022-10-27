@@ -63,8 +63,7 @@
       <td><%= order_item.item.name %></td>
       <td><%= order_item.price %></td>
       <td><%= order_item.quantity %></td>
-       <% total_price = order_item.item.add_tax_price * order_item.quantity %>
-      <td><%= total_price %></td>
+      <td><%= order_item.item.add_tax_price * order_item.quantity %></td>
       <%= form_with model: order_item, url: admin_making_status_path(order_item.id), method: :patch, local: true do |f| %>
        <td><%= f.select :making_status, OrderItem.making_statuses.keys.map {|k| [I18n.t("enums.order_item.making_status.#{k}"), k]}, {} , {class: "making_status-select"} %></td>
        <td><%= f.submit "更新", class: "btn btn-outline-success" %></td>

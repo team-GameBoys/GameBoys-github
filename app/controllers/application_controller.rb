@@ -6,8 +6,12 @@ class ApplicationController < ActionController::Base
     items_path
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(resource_or_scope)
+  if resource_or_scope.is_a?(Admin)
+    admin_home_top_path
+  else
     items_path
+  end
   end
 
   protected
