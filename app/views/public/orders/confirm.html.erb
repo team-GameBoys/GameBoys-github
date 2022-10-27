@@ -18,7 +18,7 @@
        <td><%= cart_item.item.add_tax_price.floor.to_s(:delimited) %></td>
        <td><%= cart_item.quantity %></td>
        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
-       <% @total_payment += cart_item.subtotal %>
+       <%# @total_payment += cart_item.subtotal %>
       </tr>
      <% end %>
      </tbody>

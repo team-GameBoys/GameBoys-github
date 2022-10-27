@@ -1,37 +1,39 @@
 <div class="container">
   <div class="row">
     <div class="col-auto ml-4 my-4">
-      <h2 class="mx-4 mr-5">配送先編集</h2>
+      <div class="row">
+        <h2 class="mx-4 mr-5 px-3">配送先編集</h2>
+      </div>
     </div>
   </div>
 
         <%= form_with model: @delivery, url: delivery_path(@delivery.id), method: :patch do |f| %>
         <div class="row">
-          <div class="col-sm-3 py-1">
+          <div class="col-3 py-1">
             郵便番号（ハイフンなし）
           </div>
 
-            <div class="col-sm-3 py-1">
+            <div class="col-3 py-1">
               <%= f.text_field :post_code %>
             </div>
           </div>
 
             <div class="row">
-              <div class="col-sm-3 py-2">
+              <div class="col-3 py-2">
                 住所
               </div>
-              <div class="col-sm-3 py-1">
+              <div class="col-3 py-1">
                 <%= f.text_field :address, size: 50 %>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-3 py-2">
+              <div class="col-3 py-2">
                 宛名
               </div>
-              <div class="col-sm-5 py-1">
+              <div class="col-5 py-1">
                 <%= f.text_field :name %>
               </div>
-              <div class="col-sm-3 py-1">
+              <div class="col-3 py-1">
                 <%= f.submit "変更内容を保存", class: "btn btn-success" %>
                 <% end %>
               </div>

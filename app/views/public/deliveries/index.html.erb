@@ -1,52 +1,54 @@
 <div class="container">
   <div class="row">
     <div class="col-auto my-4">
-      <h2 class="mx-5">配送先登録/一覧</h2>
+      <div class="row">
+        <h2 class="mx-5 px-3">配送先登録/一覧</h2>
+      </div>
     </div>
   </div>
 
     <%= form_with model: @delivery, url: deliveries_path, method: :post do |f| %>
 
     <div class="row">
-      <div class="col-sm-3 py-1">
+      <div class="col-3 py-1">
         郵便番号（ハイフンなし）
       </div>
-      <div class="col-sm-3 py-1">
+      <div class="col-3 py-1">
         <%= f.text_field :post_code %>
       </div>
       </div>
 
         <div class="row">
-          <div class="col-sm-3 py-2">
+          <div class="col-3 py-2">
             住所
           </div>
-          <div class="col-sm-3 py-1">
+          <div class="col-3 py-1">
             <%= f.text_field :address, size: 60 %>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-sm-3 py-2">
+          <div class="col-3 py-2">
             宛名
           </div>
-          <div class="col-sm-5 py-1">
+          <div class="col-5 py-1">
             <%= f.text_field :name %>
           </div>
-          <div class="col-sm-2 py-1 ml-3">
+          <div class="col-2 py-1 ml-3">
             <%= f.submit "新規登録", class: "btn btn-success btn-block" %>
             <% end %>
           </div>
         </div>
     </div>
     <div class="row mt-4 ml-5">
-      <div class="col-sm-7 ml-5">
+      <div class="col-7 ml-5">
       <table class="table table-bordered ml-5">
         <thead>
           <tr>
-            <th class="col-2">郵便番号</th>
-            <th>住所</th>
-            <th class="col-2">宛名</th>
-            <th></th>
+            <th class="col-2" style="background-color: #e5e5e5;">郵便番号</th>
+            <th style="background-color: #e5e5e5;">住所</th>
+            <th class="col-2" style="background-color: #e5e5e5;">宛名</th>
+            <th style="background-color: #e5e5e5;"></th>
           </tr>
         </thead>
 
