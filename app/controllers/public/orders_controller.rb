@@ -15,7 +15,7 @@ class Public::OrdersController < ApplicationController
       # view で定義しているselect_address 1 を選択した場合
     @order.post_code = current_customer.post_code
     @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_customer.last_name
+    @order.name = current_customer.last_name + current_customer.first_name
       # current_customerの住所を保存する
    elsif params[:order][:select_address] == "2"
       # view で定義しているselect_address 2 を選択した場合
