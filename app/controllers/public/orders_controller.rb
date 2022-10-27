@@ -6,11 +6,6 @@ class Public::OrdersController < ApplicationController
   end
 
   # 購入確定
-  # def create
-
-  #   order.save
-  #   redirect_to 'orders/complete'
-  # end
 
   def confirm
     @order = Order.new(order_params)
@@ -37,12 +32,11 @@ class Public::OrdersController < ApplicationController
     @total_payment = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 
-  # def create
-  #   @orders = Order.all
-  # end
 
   def show
     @order = Order.find(params[:id])
+    @total = 0
+    
   end
 
   def create
