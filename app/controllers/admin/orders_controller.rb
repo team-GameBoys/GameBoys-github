@@ -11,7 +11,7 @@ class Admin::OrdersController < ApplicationController
     @order_items = @order.order_items
      if @order.update(order_params)
       if @order.status == "confirmation"
-       @order_items.update_all(making_status: b)
+       @order_items.update_all(making_status: :b)
       end
        redirect_to request.referer
      end
