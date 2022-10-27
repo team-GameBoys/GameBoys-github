@@ -6,9 +6,11 @@
       </div>
     </div>
   </div>
-
-    <%= form_with model: @customer, url: customer_session_path, method: :patch do |f| %>
-
+  
+　　　　　　　　　　　　<!--updateなのでupdate_path-->
+    <%= form_with model: @customer, url: update_path, method: :patch do |f| %>
+　　　　　　　　　　　　
+　　　　　　　　　　　　
     <div class="row">
       <div class="col-3 py-1 mt-2">
         氏名

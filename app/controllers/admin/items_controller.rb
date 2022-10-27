@@ -1,6 +1,6 @@
 class Admin::ItemsController < ApplicationController
   # Adminアカウントがログインしないと使えないようにする
-  # before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   def show
     @item = Item.find(params[:id])

@@ -4,9 +4,19 @@ ja: # 日本語の設定
         payment_method: # カラム名
          credit_card: "クレジット払い"
          transfer: "銀行振込"
+        status:
+         waiting: "入金待ち"
+         confirmation: "入金確認"
+         production: "製作中"
+         preparing: "発送準備中"
+         sent: "発送済み"
       customer: # モデル名
         is_active: # カラム名
          withdrawal: "退会"
          effectiveness: "有効"
-
-      
+      order_item:
+        making_status:
+         a: "製作不可"
+         b: "製作待ち"
+         c: "製作中"
+         d: "製作終了"

@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+   before_action :authenticate_customer!
   # 注文情報入力画面から作る郵便番号や宛名、住所を保存する
   def new
     @order = Order.new
