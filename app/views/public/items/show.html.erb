@@ -1,70 +1,81 @@
 <!--カスタマー側の商品詳細ページ-->
 
 
-<!--ジャンル検索機能追加-->
-<table>
-  <div>
-    ジャンル検索
+<!--<p id="notice"></p>-->
+<div class="container pl-0 mt-5">
+  <div class="row mt-5">
+    <div class="col=3 ml-3 mr-5">
+      <!--ジャンル検索-->
+      <table class="table m-3">
+        <thead>
+          <th>
+            ジャンル検索
+          </th>
+        </thead>
+        <%= form_tag items_path,method: :get do %>
+          <% @genres.each do |genre| %>
+            <tr>
+              <!--ジャンルごとのアイテム一覧に飛ばしたい-->
+                <td>
+                  <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
+                  <%= link_to items_path(genre_id: genre.id) do %>
+                    <%= genre.name %>
+                  <% end %>
+                </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
   </div>
-  <%= form_tag items_path,method: :get do %>
-    <% @genres.each do |genre| %>
-      <tr>
-        <!--ジャンルごとのアイテム一覧に飛ばしたい-->
-          <td>
-            <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
-            <%= link_to items_path(genre_id: genre.id) do %>
-              <%= genre.name %>
-            <% end %>
-          </td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
 <!--ジャンル検索機能ここで終わり-->
 
 
 <p id="notice"></p>
-<div class= "container mt-5 mb-5">
-  <div class= "row text-center text-xs-center text-sm-left text-md-left" >
-    <div class= "col-xs-12 col-sm-12 col-md-6 mx-auto text-right" >
-      <%= image_tag @item.get_image(400,400) %>
-    </div>
-    <div class= "col-xs-12 col-sm-12 col-md-6 item-details mx-auto" >
-    <div class="row">
-      <h2 class="px-3">
-        <strong>
-          <%= @item.name %>
-        </strong>
-      </h2>
-    </div>
-    <div class="row">
-      <h4 class="px-3 py-3">
-        <%= simple_format(@item.introduction) %>
-      </h4>
-    </div>
-      <% if @item.is_active == true %>
-        <p class ="text-success">販売中</p>
-        <!--@item.add_tax_price-->
-        <!--.to_s(:delimited)は3桁ごとにカンマ区切りで表示してくれる便利なメソッドです-->
-        <h3>¥ <%= @item.add_tax_price.to_s(:delimited) %> (税込)</h3>
-        <p>
-          <!--わからん-->
-          <!--カートに入れると-->
-          <!--参考-->
-          <!--https://railsdoc.com/page/form_with-->
-          <!--modelの指定はcart_itemsにする。そうすることによって、cart_itemsコントローラから持ってくるようになる。-->
-          <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-            <%= f.hidden_field :item_id, :value => @item.id  %>
-            <!--選択できる数量は0以上にしたい-->
-            <%= f.number_field :quantity, placeholder:"個数選択",min:0 %>
-            <%= f.submit "カートに入れる", class: "btn btn-success" %>
-          <% end %>
-        </p>
-      <% else %>
-        <h3 class="text-danger">
-          SOLD OUT!!
-        </h3>
-      <% end %>
+<!--<div class= "container mt-5 mb-5">-->
+  <!--<div class= "row text-center text-xs-center text-sm-left text-md-left" >-->
+  <div class="col-9">
+    <div class= "row text-center text-xs-center text-sm-left text-md-left" >
+      <div class= "col-xs-12 col-sm-12 col-md-6 mx-auto text-right" >
+        <%= image_tag @item.get_image(400,400) %>
+      </div>
+      <div class= "col-xs-12 col-sm-12 col-md-6 item-details mx-auto" >
+      <div class="row">
+        <h2 class="px-3">
+          <strong>
+            <%= @item.name %>
+          </strong>
+        </h2>
+      </div>
+      <div class="row">
+        <h4 class="px-3 py-3">
+          <%= simple_format(@item.introduction) %>
+        </h4>
+      </div>
+        <% if @item.is_active == true %>
+          <p class ="text-success">販売中</p>
+          <!--@item.add_tax_price-->
+          <!--.to_s(:delimited)は3桁ごとにカンマ区切りで表示してくれる便利なメソッドです-->
+          <h3>¥ <%= @item.add_tax_price.to_s(:delimited) %> (税込)</h3>
+          <p>
+            <!--わからん-->
+            <!--カートに入れると-->
+            <!--参考-->
+            <!--https://railsdoc.com/page/form_with-->
+            <!--modelの指定はcart_itemsにする。そうすることによって、cart_itemsコントローラから持ってくるようになる。-->
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+              <%= f.hidden_field :item_id, :value => @item.id  %>
+              <!--選択できる数量は0以上にしたい-->
+              <%= f.number_field :quantity, placeholder:"個数選択",min:0 %>
+              <%= f.submit "カートに入れる", class: "btn btn-success" %>
+            <% end %>
+          </p>
+            <% else %>
+              <h3 class="text-danger">
+                SOLD OUT!!
+              </h3>
+            <% end %>
+          </div>
+      </div>
     </div>
   </div>
 </div>
