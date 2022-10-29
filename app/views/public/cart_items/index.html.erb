@@ -1,11 +1,19 @@
 <%#= render %>
 <div class="container mt-5 mb-4">
+<% if @cart_items.empty? %>
+ <div class="row">
+  <h2 class="px-3">ショッピングカート</h2>
+ </div>
+   <div class="mt-5 mb-0"><h3 class="text-center"><b>カートに商品が入っておりません</b><h3></div>
+</div>
+<% else %>
   <div class="row mb-3">
     <div class="col-5">
       <div class="row">
         <h2 class="px-3">ショッピングカート</h2>
       </div>
     </div>
+
     <div class="col-3 offset-4">
         <%= link_to cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" do %>
           <span>カートを空にする</span>
@@ -64,6 +72,7 @@
         <span>情報入力画面に進む</span>
       <% end %>
     </div>
+<% end %>
 </div>
 
 
