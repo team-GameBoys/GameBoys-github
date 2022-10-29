@@ -1,6 +1,6 @@
- <div class="container">
+ <div class="container mt-5">
   <div class="row mb-2 ml-5">
-   <h2>注文情報確認画面</h2>
+   <h2 class="px-3">注文情報確認画面</h2>
   </div>
   <div class="row">
    <div class="col-8">
@@ -56,6 +56,7 @@
       <td>数量</td>
       <td>小計</td>
       <td>製作ステータス</td>
+      <td></td>
      </tr>
     <% @order.order_items.each do |order_item| %>
      <% total_price = 0 %>
@@ -80,15 +81,15 @@
      </tr>
      <tr>
       <td width="120"><strong>送料</strong></td>
-      <td>800<%= @order.status %></td>
+      <td>800円</td>
      </tr>
      <tr>
       <td><strong>商品合計</strong></td>
-      <td><%= @order.total_payment.to_s(:delimited) %></td>
+      <td><%= @order.total_payment.to_s(:delimited) %>円</td>
      </tr>
      <tr>
       <td><strong>請求金額合計</strong></td>
-      <td><%= @order.total_payment.+800 %></td>
+      <td><%= @order.total_payment.+800 %>円</td>
      </tr>
     </table>
    </div>

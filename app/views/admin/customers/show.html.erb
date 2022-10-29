@@ -1,12 +1,12 @@
 <!--管理者側  会員情報詳細画面-->
-<div class="container">
+<div class="container mt-5">
   <div class="row">
-    <h2><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
+    <h2 class="px-3"><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h2>
     <div class="col-sm-3 ml-5 my-4">
-      
+
     </div>
   </div>
-  
+
     <div class="row">
       <div class="col-sm-3 py-1 mt-2">
         会員ID
@@ -30,7 +30,7 @@
         フリガナ
       </div>
       <div class="col-sm-3 py-1">
-        <%= @customer.last_name_kana + @customer.first_name_kana %> 
+        <%= @customer.last_name_kana + @customer.first_name_kana %>
       </div>
     </div>
 
@@ -60,7 +60,7 @@
         <%= @customer.phone_number %>
       </div>
     </div>
-            
+
     <div class="row">
       <div class="col-sm-3 py-1 mt-1">
          メールアドレス
@@ -69,7 +69,7 @@
         <%= @customer.email %>
       </div>
     </div>
-            
+
     <div class="row">
       <div class="col-sm-3 py-1 mt-1">
          会員ステータス
@@ -82,7 +82,7 @@
         <% end %>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-sm-3">
       </div>
@@ -95,6 +95,6 @@
         <%= link_to "注文履歴一覧を見る", admin_order_path, class: "btn btn-primary btn-block" %>
       </div>
     </div>
-    
+
   </div>
 </div>
