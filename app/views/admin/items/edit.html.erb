@@ -1,33 +1,36 @@
 <!--管理者側の商品編集ページ-->
 <p id="notice"></p>
-<div class = "d-flex flex-row bd-highlight mb-3">
+
+<div class="container">
+  <div class="row">
+    <div class = "d-flex flex-row bd-highlight mb-3 ml-5 mt-5">
   <div class="p-2 bd-highlight">
-    <div class= "p-2 bg-light border">
-      <h2>商品編集</h2>
+    <div class= "row">
+      <h2 class="px-3">商品編集</h2>
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-10 px-sm-0 mx-auto">
+    <div class="col-11 px-0 mx-auto ">
       <%= form_with model: @item, url: admin_item_path, local: true do |f| %>
         <table>
           <tr>
-            <div class="form-group">
-              <th>
+            <div class="form-group mx-3">
+              <td>
                 <%=f.label :商品画像 %>
-              </th>
-              <th>
+              </td>
+
+              <td>
                 <%= f.file_field :image,accept: 'image/*' %>
-              </th>
+              </td>
             </div>
           </tr>
 
           <tr>
             <div class="form-group">
-              <th>
+              <td>
                 <%= f.label :商品名 %>
-              </th>
+              </td>
+
               <td>
                 <%= f.text_field :name,placeholder:"商品名" %>
               </td>
@@ -36,20 +39,22 @@
 
           <tr>
             <div class="form-group">
-              <th>
-                <%= f.label :商品説明 %>
-              </th>
               <td>
-                <%= f.text_area :introduction, size: "100*5", placeholder:"ここに説明文を記述します" %>
+                <%= f.label :商品説明 %>
+              </td>
+
+              <td>
+                <%= f.text_area :introduction, size: "80*5", placeholder:"ここに説明文を記述します" %>
               </td>
             </div>
           </tr>
 
           <tr>
             <div class="form-group">
-              <th>
+              <td>
                 <%= f.label :ジャンル %>
-              </th>
+              </td>
+
               <td>
                 <!--セレクトボックスを作るための記述-->
                 <!--= f.collection_select カラム名, 要素の配列, value属性の項目, テキストの項目, { prompt: "選択してください" } -->
@@ -63,9 +68,10 @@
 
           <tr>
             <div class="form-group">
-              <th>
+              <td>
                 <%= f.label :税抜価格 %>
-              </th>
+              </td>
+
               <td>
                 <%= f.text_field :price, placeholder: "1,000" %>円
               </td>
@@ -74,9 +80,10 @@
 
           <tr>
             <div class="form-group">
-              <th>
-                <%= f.label :販売ステータス %>
-              </th>
+              <td>
+                <%= f.label :販売ステータス, class: "mr-4" %>
+              </td>
+
               <td>
                 <%= f.radio_button :is_active, true, checked: true %>
                 <%= f.label :is_active, "販売中" %>
