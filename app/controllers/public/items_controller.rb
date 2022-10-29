@@ -8,7 +8,7 @@ class Public::ItemsController < ApplicationController
     # 1,2,3,4,‥‥が返ってきたらtrue側、0,空nilの時は、else
     if params[:genre_id]
       # 原則モデル名は大文字、カラムは小文字でいい
-      @genre =  Genre.find(params[:genre_id])
+      @genre = Genre.find(params[:genre_id])
       # findはIDだけでデータを探す、find_by　ID以外でも、カラムの条件でも探す例えばfind_by(item_id: params[:cart_item][:item_id])左側に.　 where
       @genre_name = @genre.name
       # そのジャンルのアイテム
@@ -29,7 +29,7 @@ class Public::ItemsController < ApplicationController
   end
 
   private
-  
+
   def item_params
     params.require(:item).permit(:genre_id,:name,:introduction,:image,:price)
   end

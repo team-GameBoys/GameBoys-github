@@ -32,3 +32,8 @@
  #top_image p {
    color: rgba(250,250,250,0.9);
  }
+
+ .link {
+    text-decoration: none;
+    color: #777;
+}

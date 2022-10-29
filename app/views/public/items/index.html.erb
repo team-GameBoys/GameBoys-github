@@ -16,7 +16,7 @@
               <!--ジャンルごとのアイテム一覧に飛ばしたい-->
                 <td>
                   <!--左側が、paramsの中に入る名前、右側が実際に入ってくる値-->
-                  <%= link_to items_path(genre_id: genre.id) do %>
+                  <%= link_to items_path(genre_id: genre.id), :style=>"color: #777;" do %>
                     <%= genre.name %>
                   <% end %>
                 </td>

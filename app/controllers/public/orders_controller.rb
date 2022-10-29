@@ -6,11 +6,6 @@ class Public::OrdersController < ApplicationController
   end
 
   # 購入確定
-  # def create
-
-  #   order.save
-  #   redirect_to 'orders/complete'
-  # end
 
   def confirm
     @order = Order.new(order_params)
@@ -20,7 +15,7 @@ class Public::OrdersController < ApplicationController
       # view で定義しているselect_address 1 を選択した場合
     @order.post_code = current_customer.post_code
     @order.address = current_customer.address
-    @order.name = current_customer.first_name + current_customer.last_name
+    @order.name = current_customer.last_name + current_customer.first_name
       # current_customerの住所を保存する
    elsif params[:order][:select_address] == "2"
       # view で定義しているselect_address 2 を選択した場合
@@ -37,12 +32,11 @@ class Public::OrdersController < ApplicationController
     @total_payment = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 
-  # def create
-  #   @orders = Order.all
-  # end
 
   def show
     @order = Order.find(params[:id])
+    @total = 0
+    
   end
 
   def create
